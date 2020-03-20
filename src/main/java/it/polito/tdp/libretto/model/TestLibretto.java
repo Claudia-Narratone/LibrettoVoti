@@ -18,11 +18,16 @@ public class TestLibretto {
 		System.out.println(this.lib);
 		System.out.println(this.lib.stampaVotiUguali(20));
 		System.out.println(this.lib.estraiVotiUguali(24));
+		
+		String nomeCorso="Analisi 2";
+		Voto votoAnalisi=lib.cercaNomeCorso(nomeCorso);
+		System.out.println("Il voto di "+nomeCorso+" é "+votoAnalisi);
 		}
 
 	public static void main(String[] args) {
 		TestLibretto test= new TestLibretto();
 		test.run();
 	}
-
+	
+	
 }

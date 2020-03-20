@@ -8,8 +8,14 @@ public class Libretto {
 	private List<Voto> voti=new ArrayList<Voto>();
 	
 
-	public void add(Voto v) {
-		voti.add(v);
+	public boolean add(Voto v) {
+		if(this.isConflitto(v)||this.isDuplicato(v))
+			return false;
+		else {
+			voti.add(v);
+			return true;
+		}
+			
 	}
 	
 	public String toString() {
@@ -38,5 +44,34 @@ public class Libretto {
 			}
 		}
 		return nuovo;
+	}
+	
+	public Voto cercaNomeCorso(String nomeCorso) {
+		/*for(Voto v:voti) {
+			if(v.getNomeCorso().equals(nomeCorso)) {
+				return v;
+			}
+		}
+		return null;*/
+		
+		int posizione=this.voti.indexOf(new Voto(nomeCorso, 0, null));
+		if(posizione!=-1)
+			return this.voti.get(posizione);
+		else
+			return null;
+	}
+	
+	public boolean isDuplicato(Voto v) {
+		Voto esiste=this.cercaNomeCorso(v.getNomeCorso());
+		if(esiste==null)
+			return false;
+		return(esiste.getVoto()==v.getVoto());
+	}
+//determina se esiste un oggetto Voto con lo stesso nome corso ma voto  diverso:
+	public boolean isConflitto(Voto v) {
+		Voto esiste=this.cercaNomeCorso(v.getNomeCorso());
+		if(esiste==null)
+			return false;
+		return(esiste.getVoto()!=v.getVoto());
 	}
 }
